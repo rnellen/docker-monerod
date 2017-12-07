@@ -1,0 +1,27 @@
+version: '3'
+services:
+  monerod:
+    build:
+      context: .
+      args:
+        - MONERO_VERSION=${MONERO_VERSION}
+        - MONERO_SHA=${MONERO_SHA}
+    image: 'rnellen/monerod:${MONERO_VERSION}'
+    restart: 'unless-stopped'
+    container_name: monerod
+    stdin_open: true
+    ports:
+        - 18080:18080
+        - 18081:18081
+    volumes:
+      - /data/mediabox/app-data/monerod:/root/.bitmonero
+    command: "\
+      --non-interactive \
+      --log-level=0 \
+      --rpc-bind-ip=0.0.0.0 \
+      --rpc-login ${RPC_USERNAME}:${RPC_PASSWROD} \
+      --confirm-external-bind \
+      --fast-block-sync=1 \
+      --db-sync-mode=fast \
+      --db-salvage \
+      "
