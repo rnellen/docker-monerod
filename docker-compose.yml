@@ -28,6 +28,8 @@ services:
       
   export:
     image: 'rnellen/monerod:${MONERO_VERSION}'
+    depends_on:
+      - monerod
     stdin_open: true
     volumes:
       - /data/mediabox/app-data/monerod:/root/.bitmonero
@@ -35,6 +37,8 @@ services:
 
   import:
     image: 'rnellen/monerod:${MONERO_VERSION}'
+    depends_on:
+      - monerod
     stdin_open: true
     volumes:
       - /data/mediabox/app-data/monerod:/root/.bitmonero
