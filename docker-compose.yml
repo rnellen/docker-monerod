@@ -6,7 +6,9 @@ services:
       args:
         - MONERO_VERSION=${MONERO_VERSION}
         - MONERO_SHA=${MONERO_SHA}
+    image: 'rnellen/monerod:${MONERO_VERSION}'
     restart: 'unless-stopped'
+    container_name: monerod
     stdin_open: true
     ports:
         - 18080:18080
@@ -25,12 +27,14 @@ services:
       "
       
   export:
+    image: 'rnellen/monerod:${MONERO_VERSION}'
     stdin_open: true
     volumes:
       - /data/mediabox/app-data/monerod:/root/.bitmonero
     entrypoint: ["monero-blockchain-export"]
 
   import:
+    image: 'rnellen/monerod:${MONERO_VERSION}'
     stdin_open: true
     volumes:
       - /data/mediabox/app-data/monerod:/root/.bitmonero
