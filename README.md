@@ -10,3 +10,4 @@ Make sure you have a `.env` file in the root folder. Have a look at env.example 
     docker-compose log
 or
     docker logs -f monerod
+    docker-compose log
